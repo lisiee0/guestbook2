@@ -42,14 +42,14 @@
 	<!-- list section -->
 	<% 
 	for(GuestbookVo vo: gbList) {
-		int no= vo.getNo();
 	%>
 		<table border= "1" width= "500px">
 			<tr>
 				<td><%=vo.getNo()%></td>
 				<td><%=vo.getName()%></td>
 				<td><%=vo.getRegDate()%></td>
-				<td><a href="/guestbook2/gbc?act=deleteForm&no=<%=no%>">삭제</a></td>
+				
+				<td><a href="/guestbook2/gbc?action=deleteForm&no=<%=vo.getNo()%>">삭제</a></td>
 			</tr>
 			<tr>
 				<td colspan= "4">
