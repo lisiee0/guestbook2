@@ -71,13 +71,17 @@ public class GuestbookController extends HttpServlet {
 			
 			WebUtil.redirect(request, response, "/guestbook2/gbc?action=addList");
 		}
-		else {
-			System.out.println("error");
+		else { // list를 기본 페이지로 설정
+			GuestbookDao gbDao= new GuestbookDao();
+			List<GuestbookVo> gbList= gbDao.getList();
+			
+			request.setAttribute("gl", gbList);
+			
+			WebUtil.forward(request, response, "/WEB-INF/addList.jsp");
 		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
-
 }
