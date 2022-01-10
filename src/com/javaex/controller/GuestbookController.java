@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.javaex.dao.GuestbookDao;
+import com.javaex.util.WebUtil;
 import com.javaex.vo.GuestbookVo;
 
 
@@ -28,8 +29,7 @@ public class GuestbookController extends HttpServlet {
 			
 			request.setAttribute("gl", gbList);
 			
-			RequestDispatcher rd= request.getRequestDispatcher("/WEB-INF/addList.jsp");
-			rd.forward(request, response);	
+			WebUtil.forward(request, response, "/WEB-INF/addList.jsp");
 		}
 		
 		// 방명록 추가
@@ -44,14 +44,12 @@ public class GuestbookController extends HttpServlet {
 			
 			gbDao.guestInsert(gv);
 			
-			response.sendRedirect("/guestbook2/gbc?action=addList");
+			WebUtil.redirect(request, response, "/guestbook2/gbc?action=addList");
 		}
 		
 		// 방명록 삭제폼
 		else if("deleteForm".equals(act)) {
-			
-			RequestDispatcher rd= request.getRequestDispatcher("/WEB-INF/deleteForm.jsp");
-			rd.forward(request, response);
+			WebUtil.forward(request, response, "/WEB-INF/deleteForm.jsp");
 		}
 		
 		//방명록 삭제
@@ -71,7 +69,7 @@ public class GuestbookController extends HttpServlet {
 				System.out.println("비밀번호가 불일치");
 			}
 			
-			response.sendRedirect("/guestbook2/gbc?action=addList");
+			WebUtil.redirect(request, response, "/guestbook2/gbc?action=addList");
 		}
 		else {
 			System.out.println("error");
