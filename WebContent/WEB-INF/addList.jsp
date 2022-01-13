@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<%@ page import="java.util.List" %>
-<%@ page import="com.javaex.vo.GuestbookVo" %>
-
-<%
-	List<GuestbookVo> gbList= (List<GuestbookVo>)request.getAttribute("gl");
-%>
 
 <!DOCTYPE html>
 <html>
@@ -40,27 +35,23 @@
 	
 	
 	<!-- list section -->
-	<% 
-	for(GuestbookVo vo: gbList) {
-	%>
+	<c:forEach items="${requestScope.gl}" var="gl">
 		<table border= "1" width= "500px">
 			<tr>
-				<td><%=vo.getNo()%></td>
-				<td><%=vo.getName()%></td>
-				<td><%=vo.getRegDate()%></td>
-				
-				<td><a href="/guestbook2/gbc?action=deleteForm&no=<%=vo.getNo()%>">삭제</a></td>
+				<td>${gl.no}</td>
+				<td>${gl.name}</td>
+				<td>${gl.regDate}</td>		
+				<td><a href="/guestbook2/gbc?action=deleteForm&no=${gl.no}">삭제</a></td>
 			</tr>
 			<tr>
 				<td colspan= "4">
-					<%=vo.getContent()%>
+					${gl.content}
 				</td>
 			</tr>
 		</table>
 		<br>
-	<%	
-	}
-	%>
+	</c:forEach>
+
 	
 </body>
 </html>
